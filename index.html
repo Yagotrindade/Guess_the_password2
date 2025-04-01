@@ -5,41 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>César</title>
-    <style>
-        body {
-            background-color: #121212;
-            color: #ffffff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            flex-direction: column;
-            font-family: Arial, sans-serif;
-        }
-        input {
-            width: 300px;
-            padding: 10px;
-            margin-bottom: 10px;
-            background-color: #222;
-            border: 1px solid #444;
-            color: white;
-        }
-        button {
-            padding: 10px;
-            background-color: #444;
-            border: none;
-            color: white;
-            cursor: pointer;
-            margin: 5px;
-        }
-        button:hover {
-            background-color: #666;
-        }
-        #resultado, #mensagemVerdade {
-            margin-top: 20px;
-        }
-    </style>
+    <link rel="stylesheet" href="./resources/css/styles.css">
 </head>
+
 <body>
     <h1>Uma verdade...</h1>
     <div>
@@ -47,48 +15,22 @@
         <button onclick="revelarMensagem(2)">Opção 2</button>
         <button onclick="revelarMensagem(3)">Opção 3</button>
     </div>
-    <div id="mensagemVerdade"></div>
+    <div id="primeiraAfirmacao" onclick="alternarEstilo(this)"></div>
+    <div id="segundaAfirmacao" onclick="alternarEstilo(this)"></div>
+    <div id="terceiraAfirmacao" onclick="alternarEstilo(this)"></div>
     <input type="text" id="inputTexto" placeholder="Digite o texto cifrado...">
     <input type="number" id="inputChave" placeholder="Digite a chave (1-25)..." min="1" max="25">
     <button onclick="verificarCifra()">Verificar</button>
-    <div id="resultado"></div>
+    <div id="resultado" onclick="alternarEstilo(this)"></div>
+    <div id="image-container">
+        <img id="trocar1" src="./resources/images/tulipaComplete.png" alt="tulipaComplete">
+        <img id="trocar2" src="./resources/images/tulipaComplete.png" alt="tulipaComplete">
+        <img id="trocar3" src="./resources/images/tulipaComplete.png" alt="tulipaComplete">
+        <img id="trocar4" src="./resources/images/tulipaComplete.png" alt="tulipaComplete">
+        <img id="trocar5" src="./resources/images/tulipa.png" alt="tulipa">
+    </div>
 
-    <script>
-        const mensagens = [
-            "A resposta está onde menos se espera...",
-            "Não confie em tudo que lê, mas algo aqui está certo.",
-            "A chave para a verdade está nos números."
-        ];
-        const indiceVerdadeiro = Math.floor(Math.random() * 3);
-
-        function revelarMensagem(opcao) {
-            let mensagemDiv = document.getElementById("mensagemVerdade");
-            mensagemDiv.innerText = mensagens[opcao - 1];
-        }
-
-        function verificarCifra() {
-            let texto = document.getElementById("inputTexto").value;
-            let chave = parseInt(document.getElementById("inputChave").value);
-            let resultadoDiv = document.getElementById("resultado");
-            
-            if (texto.length === 0 || isNaN(chave) || chave < 1 || chave > 25) {
-                resultadoDiv.innerText = "Por favor, insira um texto e uma chave válida (1-25).";
-                return;
-            }
-            
-            let decifrado = "";
-            for (let i = 0; i < texto.length; i++) {
-                let char = texto[i];
-                if (char.match(/[a-zA-Z]/)) {
-                    let base = char === char.toLowerCase() ? 97 : 65;
-                    decifrado += String.fromCharCode(((char.charCodeAt(0) - base - chave + 26) % 26) + base);
-                } else {
-                    decifrado += char;
-                }
-            }
-            
-            resultadoDiv.innerText = `Texto decifrado: ${decifrado}`;
-        }
-    </script>
+    <script src="./resources/js/script.js"></script>
 </body>
+
 </html>
